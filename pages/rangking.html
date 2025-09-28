@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranking Quiz</title>
+  <link rel="stylesheet" href="../css/quiz-style.css">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Ranking Peserta Quiz (Hari Ini)</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Skor</th>
+          <th>Tanggal & Waktu</th>
+        </tr>
+      </thead>
+      <tbody id="rankingBody"></tbody>
+    </table>
+    <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+      <a href="../index.html" class="lihat-ranking" style="background-color: #6c757d;">Kembali ke Beranda</a>
+    </div>
+  </div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem("quiz_ranking") || "[]");
+    const tbody = document.getElementById("rankingBody");
+    const today = new Date().toISOString().split("T")[0];
+
+    const filtered = data.filter(d => d.tanggal === today);
+    const sorted = filtered.sort((a, b) => b.skor - a.skor);
+
+    if (sorted.length === 0) {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td colspan="4">Belum ada peserta quiz hari ini.</td>`;
+      tbody.appendChild(row);
+    } else {
+      sorted.forEach((item, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${item.nama}</td>
+          <td>${item.skor}</td>
+          <td>${item.tanggal} ${item.waktu || ''}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>

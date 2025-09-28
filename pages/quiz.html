@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Sekolah</title>
+  <link rel="stylesheet" href="../css/quiz-style.css" />
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Quiz Sekolah</h1>
+    <div id="form-nama">
+      <p>Masukkan Nama Lengkap:</p>
+      <input type="text" id="namaPeserta" placeholder="Contoh: Andi Saputra" />
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button id="mulaiQuiz">Mulai Quiz</button>
+        <a href="rangking.html" class="lihat-ranking">Lihat Ranking</a>
+      </div>
+      <p class="peringatan" id="peringatan"></p>
+    </div>
+
+    <div id="quizSection" class="hidden">
+      <div class="quiz-header">
+        <p><strong>Nama:</strong> <span id="namaTampil"></span></p>
+        <p><strong>Sisa Waktu:</strong> <span id="timer">15:00</span></p>
+      </div>
+      <form id="quizForm"></form>
+      <button id="submitQuiz">Kumpulkan Jawaban</button>
+    </div>
+
+    <div id="hasilSection" class="hidden">
+      <h2>Quiz Selesai!</h2>
+      <p id="skorTampil"></p>
+      <a href="rangking.html" class="lihat-ranking">Lihat Ranking</a>
+    </div>
+  </div>
+
+  <script src="../js/quiz.js"></script>
+</body>
+</html>
